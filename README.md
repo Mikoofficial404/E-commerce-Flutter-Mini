@@ -36,7 +36,7 @@ The system also provides an admin dashboard to manage products, users, and order
 | **Galih**        | Backend Developer   | Builds and maintains Laravel API, handles authentication and business logic               |
 | **Ananda Salwa** | UI/UX Designer      | Designs user interfaces for mobile and web, creates wireframes and prototypes             |
 | **Rian**         | Front End Developer | Building Interface dashboard using React js and use Typesript for based progaming leangue |
-| **Andhika**      | Q/A                 | Conducts testing across web and mobile platforms to ensure functionality and performance  |
+| **Andhika**      | Front End Developer | Building Interface dashboard using React js and use Typesript for based progaming leangue  |
 
 ---
 
