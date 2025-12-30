@@ -51,6 +51,35 @@ The system also provides an admin dashboard to manage products, users, and order
 
 ---
 
+## 📦 Flutter Dependencies
+
+```yaml
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.8
+  dio: ^5.9.0
+  flutter_dotenv: ^5.1.0
+  provider: ^6.1.2
+  json_annotation: ^4.9.0
+  midtrans_sdk: 1.0.0
+  flutter_inappwebview: ^6.0.0
+  google_fonts: ^6.2.1
+  shared_preferences: ^2.3.2
+  intl: ^0.19.0
+  getwidget: ^2.0.4
+  carousel_slider: ^5.0.0
+  lottie: ^3.3.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  build_runner: ^2.4.8
+  json_serializable: ^6.8.0
+```
+---
+
 ## ⚙️ Installation & Setup
 
 1. Clone the repository:
