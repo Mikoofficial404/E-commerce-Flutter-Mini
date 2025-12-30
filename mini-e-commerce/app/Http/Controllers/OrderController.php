@@ -12,26 +12,8 @@ use Midtrans\Snap;
 
 class OrderController extends Controller
 {
-    // public function index(Request $request)
-    // {
-    //     $orders = Order::with('items.product')
-    //         ->where('user_id', $request->user()->id)
-    //         ->orderBy('created_at', 'desc')
-    //         ->get();
 
-    //     if ($orders->isEmpty()) {
-    //         return response()->json([
-    //             'messages' => 'No Orders Found',
-    //             'sucess' => false,
-    //         ], 404);
-    //     }
 
-    //     return response()->json([
-    //         'message' => 'Orders retrieved successfully',
-    //         'success' => true,
-    //         'data' => $orders,
-    //     ], 200);
-    // }
 
     public function store(Request $request)
     {
@@ -100,7 +82,7 @@ class OrderController extends Controller
         }
 
         Config::$serverKey = env('MIDTRANS_SERVER_KEY');
-        Config::$isProduction = false; // sandbox
+        Config::$isProduction = false;
         Config::$isSanitized = true;
         Config::$is3ds = true;
 
@@ -163,7 +145,6 @@ class OrderController extends Controller
             ], 400);
         }
 
-        // Kembalikan stok produk
         foreach ($order->items as $item) {
             $item->product->increment('stock', $item->quantity);
         }
@@ -180,7 +161,6 @@ class OrderController extends Controller
     public function index()
     {
         $orderDetail = Order::with('items.product', 'user')->get();
-        // dd($orderDetail);
         if ($orderDetail->isEmpty()) {
             return response()->json([
                 'message' => 'data Not Found',

@@ -2,7 +2,8 @@ import { API } from '../api/axios';
 
 export interface Product {
   id: number;
-  name: string;
+  name?: string;
+  product_name?: string;
   price: number;
   description?: string;
   stock: number;
@@ -26,7 +27,7 @@ export const createProduct = async (payload: FormData): Promise<Product> => {
 
 export const showProduct = async (id: string | number): Promise<Product> => {
   try {
-    const { data } = await API.get<{ data: Product }>(`/product/${id}`);
+    const { data } = await API.get<{ data: Product }>(`/products/${id}`);
     return data.data;
   } catch (error) {
     console.error('Show product error:', error);

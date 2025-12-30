@@ -49,8 +49,10 @@ export default function EditProduct({ productId, children }: EditProductProps) {
       if (!id) return;
       try {
         const productsData = await showProduct(id);
+        // Cek apakah field-nya 'name' atau 'product_name' dari API
+        const productName = productsData.product_name || productsData.name || '';
         setFormData({
-          product_name: productsData.name ?? '',
+          product_name: productName,
           description: productsData.description ?? '',
           price: productsData.price ?? 0,
           stock: productsData.stock ?? 0,
@@ -92,11 +94,22 @@ export default function EditProduct({ productId, children }: EditProductProps) {
     if (!id) return;
     try {
       const payload = new FormData();
-      Object.entries(formData).forEach(([key, value]) => {
-        if (value !== null) {
-          payload.append(key, value as Blob | string);
-        }
-      });
+      payload.append('_method', 'PUT');
+      
+      // Selalu kirim field text/number
+      if (formData.product_name) {
+        payload.append('product_name', formData.product_name);
+      }
+      if (formData.description) {
+        payload.append('description', formData.description);
+      }
+      payload.append('price', String(formData.price));
+      payload.append('stock', String(formData.stock));
+      
+      // Hanya kirim foto jika ada file baru yang dipilih
+      if (formData.photo_product) {
+        payload.append('photo_product', formData.photo_product);
+      }
 
       await updateProduct(id, payload);
       alert('Produk berhasil diupdate!');

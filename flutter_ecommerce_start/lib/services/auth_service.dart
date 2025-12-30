@@ -11,7 +11,7 @@ class AuthService {
       "email": email,
       "password": password,
     });
-    // ignore: unrelated_type_equality_checks
+
     if (AuthResponse == !isFalse) {
       print('is Error cant post in the data');
     }

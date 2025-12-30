@@ -18,7 +18,7 @@ class OrderProvider with ChangeNotifier {
     try {
       _orderResponse = await _orderService.createOrder(orderData);
     } catch (e) {
-      print('Error creating order: $e');
+      print('Error buat order: $e');
     } finally {
       _isLoading = false;
       notifyListeners();

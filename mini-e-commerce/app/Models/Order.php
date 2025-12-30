@@ -37,4 +37,9 @@ class Order extends Model
     {
         return $this->belongsToMany(Product::class, 'product_id');
     }
+
+    public function payment()
+    {
+        return $this->hasOne(Payment::class);
+    }
 }

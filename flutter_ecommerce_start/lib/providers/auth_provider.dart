@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../models/user_model.dart';
 import '../services/auth_service.dart';
@@ -26,10 +26,13 @@ class AuthProvider with ChangeNotifier {
 
       final prefs = await SharedPreferences.getInstance();
       await prefs.setString('jwt_token', _token!);
+      if (_user != null) {
+        await prefs.setString('username', _user!.username);
+      }
 
-      print("Login berhasil. Token disimpan.");
+      debugPrint("Login berhasil. User: ${_user?.username}");
     } catch (e) {
-      print("Login gagal: $e");
+      debugPrint("Login gagal: $e");
       rethrow;
     } finally {
       _isLoading = false;
@@ -51,9 +54,14 @@ class AuthProvider with ChangeNotifier {
       _token = authResponse.token;
 
       final prefs = await SharedPreferences.getInstance();
-      await prefs.setString('jwt_token', _token!);
+      if (_token != null) {
+        await prefs.setString('jwt_token', _token!);
+      }
+      if (_user != null) {
+        await prefs.setString('username', _user!.username);
+      }
     } catch (e) {
-      print("Register gagal: $e");
+      debugPrint("Register gagal: $e");
       rethrow;
     } finally {
       _isLoading = false;
@@ -64,6 +72,7 @@ class AuthProvider with ChangeNotifier {
   Future<void> logout() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.remove('jwt_token');
+    await prefs.remove('username');
     _user = null;
     _token = null;
     notifyListeners();
@@ -72,6 +81,10 @@ class AuthProvider with ChangeNotifier {
   Future<void> loadUser() async {
     final prefs = await SharedPreferences.getInstance();
     _token = prefs.getString('jwt_token');
+    final username = prefs.getString('username');
+    if (username != null) {
+      _user = User(id: 0, username: username, email: '');
+    }
     notifyListeners();
   }
 }

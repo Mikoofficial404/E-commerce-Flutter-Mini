@@ -15,7 +15,11 @@ Route::get('user', function (Request $request) {
 Route::post('login', [AuthController::class, 'login']);
 Route::post('register', [AuthController::class, 'register']);
 Route::post('logout', [AuthController::class, 'logout']);
+Route::post('forgot-password', [AuthController::class, 'forgotPassword']);
+Route::post('verify-otp', [AuthController::class, 'verifyOtp']);
+Route::post('reset-password', [AuthController::class, 'resetPassword']);
 Route::post('midtrans/callback', [PaymentController::class, 'callback']);
+Route::post('payment/notification', [PaymentController::class, 'callback']); // URL yang dikonfigurasi di Midtrans
 
 Route::middleware(['auth:api', 'role:admin'])->group(function () {
     Route::get('orders', [OrderController::class, 'index']);
@@ -31,4 +35,5 @@ Route::middleware(['auth:api'])->group(function () {
     Route::get('orders/{id}', [OrderController::class, 'show']);
     Route::post('orders', [OrderController::class, 'store']);
     Route::delete('orders/{id}', [OrderController::class, 'destroy']);
+    Route::get('payments/{orderCode}/check', [PaymentController::class, 'checkStatus']);
 });

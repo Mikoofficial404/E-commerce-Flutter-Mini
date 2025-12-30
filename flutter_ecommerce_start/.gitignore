@@ -43,3 +43,13 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Sensitive configuration files
+lib/config/midtrans_config.dart
+lib/config/api_config.dart
+lib/screens/home_screen.dart
+
+# Payment related files
+lib/providers/payment_provider.dart
+lib/screens/payment_webview_screen.dart
+lib/screens/checkout_screen.dart
